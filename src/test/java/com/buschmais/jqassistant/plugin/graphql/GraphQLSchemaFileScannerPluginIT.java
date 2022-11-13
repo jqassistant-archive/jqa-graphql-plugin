@@ -103,7 +103,7 @@ class GraphQLSchemaFileScannerPluginIT extends AbstractGraphQLSchemaScannerPlugi
 
     @Test
     void typeHasSourceLocation() {
-        Set<String> standardScalarNames = ScalarInfo.STANDARD_SCALARS.stream().map(GraphQLScalarType::getName).collect(toSet());
+        Set<String> standardScalarNames = ScalarInfo.GRAPHQL_SPECIFICATION_SCALARS.stream().map(GraphQLScalarType::getName).collect(toSet());
         store.beginTransaction();
         List<TypeDescriptor> typeDescriptors = query("MATCH (:GraphQL:Schema)-[:DECLARES_TYPE]->(type:GraphQL:Type) RETURN type").getColumn("type");
         typeDescriptors.stream().filter(typeDescriptor -> !standardScalarNames.contains(typeDescriptor.getName()))
